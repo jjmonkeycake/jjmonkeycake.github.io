@@ -3,390 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Support - Online Store</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for chat icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* General Styling */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #f8f8f8;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
             margin: 0;
             padding: 0;
         }
 
-        h2 {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
+        nav ul li {
+            margin: 0 20px;
         }
 
-        p {
-            font-size: 1rem;
-            color: #666;
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #ff5722;
+            color: white;
         }
 
         /* Hero Section */
         .hero {
             position: relative;
-            height: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            background-image: url('support-hero.jpg');
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
         }
 
-        .hero-video {
+        .hero::after {
+            content: "";
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            z-index: 0;
         }
 
-        .overlay-text {
-            position: absolute;
-            color: white;
-            text-align: center;
-        }
-
-        .overlay-text h1 {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .overlay-text p {
-            font-size: 1.25rem;
-        }
-
-        /* Help Categories Section */
-        .help-categories {
-            padding: 50px 20px;
-            background-color: #f5f5f5;
-        }
-
-        .categories-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .category {
-            background-color: white;
-            width: 30%;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .category h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .category p {
-            font-size: 1rem;
-            color: #666;
+        .hero h1 {
+            font-size: 50px;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
         }
 
-        .cta-btn {
-            padding: 10px 20px;
-            background-color: #0070c9;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+        .hero p {
+            font-size: 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease 0.3s forwards;
         }
 
-        .cta-btn:hover {
-            background-color: #005da0;
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* FAQ Section */
-        .faq-section {
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .faq-container {
-            margin-top: 20px;
-        }
-
-        .faq-item {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-question {
-            width: 100%;
-            background: none;
-            border: none;
-            outline: none;
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #0070c9;
-            cursor: pointer;
-            text-align: left;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            padding-top: 10px;
-            font-size: 1rem;
-            color: #666;
-        }
-
-        .faq-answer.active {
-            max-height: 200px;
-        }
-
-        /* Help Form Section */
-        .help-form {
-            padding: 50px 20px;
-            background-color: #f5f5f5;
-            text-align: center;
-        }
-
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
+        .support-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
         }
 
-        .form-container form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-container label {
-            text-align: left;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .form-container input,
-        .form-container textarea {
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .form-container button {
-            padding: 10px 20px;
-            background-color: #0070c9;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #005da0;
-        }
-
-        /* Live Chat Section */
-        .live-chat {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .chat-widget {
-            padding: 30px;
-            background-color: #0070c9;
-            color: white;
-            border-radius: 10px;
-            display: inline-block;
-        }
-
-        .chat-btn {
-            padding: 10px 20px;
+        .support-section {
             background-color: white;
-            color: #0070c9;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 10px;
-            display: inline-block;
-        }
-
-        .chat-btn:hover {
-            background-color: #005da0;
-            color: white;
-        }
-
-        /* Footer Section */
-        footer {
-            background-color: #333;
-            color: white;
             padding: 20px;
-            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
         }
 
-        .footer-links a {
+        .support-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .support-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #ff5722;
+        }
+
+        .support-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .product-links a {
+            display: block;
+            background-color: #ff5722;
             color: white;
-            margin: 0 10px;
+            text-align: center;
+            padding: 15px;
+            margin: 10px 0;
             text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
         }
 
-        .footer-links a:hover {
+        .product-links a:hover {
+            background-color: #df5036;
+        }
+
+        .support-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .support-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .support-section ul li a {
+            text-decoration: none;
+            color: #ff5722;
+        }
+
+        .support-section ul li a:hover {
             text-decoration: underline;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .categories-container {
-                flex-direction: column;
-                align-items: center;
-            }
+        /* Live Chat Button */
+        .chat-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #ff5722; /* Vibrant color */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounceIn 1s ease;
+            transition: transform 0.3s, background-color 0.3s;
+            z-index: 1001; /* Ensure it stays above other elements */
+        }
 
-            .category {
-                width: 80%;
-            }
+        .chat-btn:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
 
-            .faq-answer {
-                max-height: none;
+        .chat-btn i {
+            font-size: 20px;
+        }
+
+        /* Chat Box */
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 350px;
+            max-width: 90%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: slideIn 0.5s forwards;
+        }
+
+        .chat-header {
+            padding: 15px;
+            background-color: #ff5722; /* Matching vibrant color */
+            color: white;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .chat-header span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .chat-body {
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            border-bottom: 1px solid #f1f1f1;
+            background-color: #fafafa;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message.user {
+            background-color: #ff5722;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .message.bot {
+            background-color: #e0e0e0;
+            color: #333;
+            align-self: flex-start;
+            margin-right: auto;
+        }
+
+        .chat-footer {
+            padding: 15px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-footer input:focus {
+            border-color: #ff5722;
+        }
+
+        .chat-footer button {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .chat-footer button:hover {
+            background-color: #e64a19;
+            transform: rotate(90deg);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <header>
-        <nav class="navbar" id="navbar">
-            <div class="logo">
-                <a href="index.html">Store</a>
-            </div>
-            <ul class="nav-links">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="mac.html">Mac</a></li>
                 <li><a href="ipad.html">iPad</a></li>
                 <li><a href="iphone.html">iPhone</a></li>
                 <li><a href="watch.html">Watch</a></li>
-                <li><a href="accessories.html">Accessories</a></li>
                 <li><a href="support.html">Support</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <video autoplay muted loop class="hero-video">
-            <source src="https://www.apple.com/media/us/support/2021/video/2021/support-tpl-hero/large.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="overlay-text">
-            <h1>Support</h1>
-            <p>We're here to help you with any issues.</p>
+        <h1>Support</h1>
+        <p>We're here to help you.</p>
+    </section>
+
+    <section class="support-info">
+        <div class="support-section">
+            <h2>Find Support for Your Product</h2>
+            <p>Select your product below to get help:</p>
+            <div class="product-links">
+                <a href="#">Mac Support</a>
+                <a href="#">iPad Support</a>
+                <a href="#">iPhone Support</a>
+                <a href="#">Watch Support</a>
+            </div>
+        </div>
+        <div class="support-section">
+            <h2>Frequently Asked Questions</h2>
+            <ul>
+                <li><a href="#">How to reset your device?</a></li>
+                <li><a href="#">How to track your order?</a></li>
+                <li><a href="#">Warranty information</a></li>
+                <li><a href="#">How to contact customer service?</a></li>
+            </ul>
         </div>
     </section>
 
-    <!-- Help Categories -->
-    <section class="help-categories">
-        <h2>How can we assist you today?</h2>
-        <div class="categories-container">
-            <div class="category">
-                <h3>Device Setup</h3>
-                <p>Guides for setting up your new devices.</p>
-                <a href="#" class="cta-btn">Learn More</a>
-            </div>
-            <div class="category">
-                <h3>Repairs & Services</h3>
-                <p>Get support for repairs, replacements, or warranty.</p>
-                <a href="#" class="cta-btn">Learn More</a>
-            </div>
-            <div class="category">
-                <h3>Account Management</h3>
-                <p>Manage your Apple ID and other services.</p>
-                <a href="#" class="cta-btn">Learn More</a>
-            </div>
+    <!-- Live Chat Box -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <span><i class="fas fa-comments"></i> Live Chat</span>
+            <span onclick="toggleChat()" style="cursor: pointer;">&times;</span>
         </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-container">
-            <div class="faq-item">
-                <button class="faq-question">How do I reset my password?</button>
-                <div class="faq-answer">
-                    <p>You can reset your password by going to the Apple ID website and clicking on "Forgot Password".</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question">Where can I check the warranty status of my device?</button>
-                <div class="faq-answer">
-                    <p>You can check your warranty status on the Apple Support website under "Check Coverage".</p>
-                </div>
-            </div>
+        <div class="chat-body" id="chatBody">
+            <!-- Messages will appear here -->
         </div>
-    </section>
-
-    <!-- Help Form -->
-    <section class="help-form">
-        <h2>Need More Help?</h2>
-        <div class="form-container">
-            <form action="submit_help_form.php" method="post">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">How can we assist you?</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <button type="submit">Submit</button>
-            </form>
+        <div class="chat-footer">
+            <input type="text" id="userMessage" placeholder="Type a message...">
+            <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
         </div>
-    </section>
+    </div>
 
-    <!-- Live Chat Section -->
-    <section class="live-chat">
-        <h2>Talk to a Specialist</h2>
-        <div class="chat-widget">
-            <p>Need assistance? Start a live chat with our support team now.</p>
-            <a href="#" class="chat-btn">Start Chat</a>
-        </div>
-    </section>
+    <!-- Live Chat Button -->
+    <div class="chat-btn" id="chatBtn" onclick="toggleChat()">
+        <i class="fas fa-comments"></i>
+        Chat with Us
+    </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Online Store. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
-        </div>
     </footer>
 
     <script>
-        // FAQ Toggle
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        faqQuestions.forEach((question) => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                answer.classList.toggle('active');
-            });
-        });
+        const chatBox = document.getElementById('chatBox');
+        const chatBtn = document.getElementById('chatBtn');
+
+        function toggleChat() {
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+                // Optional: Add animation class
+                chatBox.classList.add('slideIn');
+            } else {
+                chatBox.style.display = 'none';
+                // Optional: Remove animation class
+                chatBox.classList.remove('slideIn');
+            }
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('userMessage').value.trim();
+            if (message === '') return;
+
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerText = message;
+            document.getElementById('chatBody').appendChild(userMessage);
+            document.getElementById('userMessage').value = '';
+
+            // Scroll to the bottom of the chat
+            document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+
+            // Simulate bot response
+            setTimeout(() => {
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                botMessage.innerText = getBotResponse(message);
+                document.getElementById('chatBody').appendChild(botMessage);
+
+                // Scroll to the bottom of the chat
+                document.getElementById('chatBody').scrollTop = document.getElementById('chatBody').scrollHeight;
+            }, 1000);
+        }
+
+        function getBotResponse(userMessage) {
+            const lowerCaseMessage = userMessage.toLowerCase();
+
+            if (lowerCaseMessage.includes("reset")) {
+                return "To reset your device, hold the power button and follow the on-screen instructions.";
+            } else if (lowerCaseMessage.includes("track order")) {
+                return "You can track your order using the tracking ID sent to your email.";
+            } else if (lowerCaseMessage.includes("warranty")) {
+                return "Our products come with a 1-year warranty. For more details, please visit our warranty page.";
+            } else if (lowerCaseMessage.includes("joshuaworrall")) {
+                return "The best persone to ever exist is joshua worrall and he is the best persone you will ever meeet.";
+            } else if (lowerCaseMessage.includes("contact customer service")) {
+                return "You can reach customer service by filling out the contact form on this page.";
+            } else {
+                return "I'm not sure how to help with that. Please contact support for further assistance.";
+            }
+        }
     </script>
 </body>
 </html>

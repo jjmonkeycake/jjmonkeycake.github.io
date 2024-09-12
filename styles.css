@@ -44,7 +44,7 @@ ul {
 .logo a {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #0071e3;
+    color: #ff320e;
 }
 
 .nav-links {
@@ -150,7 +150,7 @@ html {
 }
 
 .product-item .cta-btn {
-    background-color: #0071e3;
+    background-color: #ff320e;
     color: white;
     padding: 12px;
     border-radius: 8px;
@@ -161,7 +161,7 @@ html {
 }
 
 .product-item .cta-btn:hover {
-    background-color: #005bb5;
+    background-color: #ee3210;
 }
 
 /* Responsive Design */
@@ -237,4 +237,142 @@ footer .legal {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Chat button */
+.chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff320e;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.chat-btn:hover {
+    background-color: #ee3210;
+}
+
+/* Chat box */
+.chat-box {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.chat-header {
+    background-color: #ff320e;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-header h3 {
+    margin: 0;
+}
+
+.chat-header span {
+    cursor: pointer;
+}
+
+.chat-body {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.chat-footer {
+    display: flex;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.chat-footer input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.chat-footer button {
+    background-color: #ff320e;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.chat-footer button:hover {
+    background-color: #ff320e;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message.bot {
+    background-color: #f1f1f1;
+}
+
+.message.user {
+    background-color: #ff320e;
+    color: white;
+    text-align: right;
+}
+
+/* Nav Bar Styles */
+header {
+    background-color: #fff;
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: center; /* Centers the navbar horizontally */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #ff320e; /* Orange hover effect */
+    color: rgb(0, 0, 0);
 }
